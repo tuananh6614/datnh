@@ -71,11 +71,5 @@ python run.py
 cd thanhtoan  # hoặc baidoxe
 pio run --target upload
 ```
+Nguyễn Tuấn Anh
 
-## Tác giả
-
-**Nguyễn Tuấn Anh**
-
-## License
-
-MIT License
