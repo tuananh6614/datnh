@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(start \"\" \"d:/FIRMWAVE/project/docs/so_do_he_thong.html\")",
+      "Bash(start \"\" \"d:/FIRMWAVE/project/docs/so_do_khoi.html\")",
+      "Bash(start:*)",
+      "Bash(dir /s /b \"E:\\Documents\\PlatformIO\\Projects\\thanhtoan\\*.cpp\" 2)",
+      "Bash(nul)",
+      "Bash(ssh:*)",
+      "Bash(cat:*)",
+      "Bash(dir:*)",
+      "Bash(dir /s /b D:FIRMWAVE*thanhtoan* 2)",
+      "Bash(curl:*)",
+      "Bash(findstr:*)",
+      "Bash(netstat:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(net stop:*)",
+      "Bash(python:*)",
+      "Bash(timeout 10 ssh:*)",
+      "Bash(timeout 15 ssh:*)",
+      "Bash(git config:*)",
+      "Bash(git clone:*)",
+      "Bash(robocopy:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

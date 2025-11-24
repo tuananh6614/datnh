@@ -1,0 +1,33 @@
+# Thư mục cần bỏ qua
+.venv/
+venv/
+plates/
+.claude/
+
+# Python cache & build
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+build/
+dist/
+*.egg-info/
+
+# Log & tạm
+*.log
+
+# IDE (nếu không muốn đưa settings lên repo)
+.vscode/
+.idea/
+
+# Hệ điều hành
+Thumbs.db
+.DS_Store
+
+# Environment variables (QUAN TRONG - chua thong tin tai khoan ngan hang)
+.env
+.env.*
+
+# Environment variables (QUAN TRONG - chua thong tin tai khoan ngan hang)
+.env
+.env.*

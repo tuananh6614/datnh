@@ -1,0 +1,18 @@
+{
+  "cam_in_index": 1,
+  "cam_out_index": 2,
+  "total_slots": 500,
+  "mqtt_enable": true,
+  "mqtt_host": "127.0.0.1",
+  "mqtt_port": 18883,
+  "gate_id": "gate01",
+  "auto_start_broker": false,
+  "broker_exe": "C:\\Program Files\\mosquitto\\mosquitto.exe",
+  "broker_conf": "D:\\FIRMWAVE\\project\\mosquitto.conf",
+  "server_url": "http://127.0.0.1:5000",
+  "db_host": "127.0.0.1",
+  "db_port": 5432,
+  "db_name": "parking_system",
+  "db_user": "parking_admin",
+  "db_password": "parking123"
+}

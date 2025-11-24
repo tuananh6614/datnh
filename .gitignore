@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+*.egg-info/
+dist/
+build/
+*.egg
+
+# PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Temp files
+*.tmp
+*.temp
+*.bak
+
+# Database
+*.db
+*.sqlite
+
+# Credentials (DO NOT COMMIT)
+# config.json  # Uncomment if contains secrets
+*.pem
+*.key
+
+# Large files
+*.pt
+*.pth
+*.onnx
+*.weights
+
+# Images (optional - uncomment if too large)
+# plates/
+# *.jpg
+# *.png

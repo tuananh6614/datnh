@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>So do Khoi - He thong Bai do xe Thong minh</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #fff;
+            padding: 20px;
+        }
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fff;
+        }
+        .title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #0066cc;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .diagram-container {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            background: #fafafa;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="title">SO DO KHOI HE THONG BAI DO XE THONG MINH</div>
+        <div class="subtitle">Block Diagram - Smart Parking System</div>
+
+        <div class="diagram-container">
+            <svg width="100%" height="750" viewBox="0 0 1100 750">
+                <!-- ========== ĐỊNH NGHĨA ========== -->
+                <defs>
+                    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                    </marker>
+                    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#0066cc"/>
+                    </marker>
+                    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#2E7D32"/>
+                    </marker>
+                    <marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#7B1FA2"/>
+                    </marker>
+                </defs>
+
+                <!-- ========== KHỐI 1: CỔNG VÀO (trái) ========== -->
+                <g transform="translate(20, 80)">
+                    <rect x="0" y="0" width="200" height="280" rx="10" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+                    <text x="100" y="25" text-anchor="middle" font-size="14" font-weight="bold" fill="#1565C0">CONG VAO</text>
+
+                    <!-- Camera Vào -->
+                    <rect x="20" y="45" width="160" height="50" rx="5" fill="#fff" stroke="#333" stroke-width="2"/>
+                    <text x="100" y="75" text-anchor="middle" font-size="12" font-weight="bold">CAMERA HD #1</text>
+
+                    <!-- RFID Vào -->
+                    <rect x="20" y="110" width="160" height="50" rx="5" fill="#fff" stroke="#2196F3" stroke-width="2"/>
+                    <text x="100" y="140" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565C0">RFID RC522 #1</text>
+
+                    <!-- ESP32 #1 -->
+                    <rect x="20" y="175" width="160" height="70" rx="5" fill="#1B5E20" stroke="#0D3610" stroke-width="2"/>
+                    <text x="100" y="200" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">ESP32-S3 #1</text>
+                    <text x="100" y="220" text-anchor="middle" font-size="10" fill="#AED581">Quan ly Cong Vao/Ra</text>
+                    <text x="100" y="235" text-anchor="middle" font-size="9" fill="#AED581">MQTT Publisher</text>
+
+                    <!-- Nút bấm -->
+                    <circle cx="60" cy="265" r="12" fill="#FF5722" stroke="#E64A19" stroke-width="2"/>
+                    <text x="90" y="270" font-size="10" fill="#333">Nut bam</text>
+                </g>
+
+                <!-- ========== KHỐI 2: CỔNG RA (trái dưới) ========== -->
+                <g transform="translate(20, 400)">
+                    <rect x="0" y="0" width="200" height="200" rx="10" fill="#FFF3E0" stroke="#E65100" stroke-width="2"/>
+                    <text x="100" y="25" text-anchor="middle" font-size="14" font-weight="bold" fill="#E65100">CONG RA</text>
+
+                    <!-- Camera Ra -->
+                    <rect x="20" y="45" width="160" height="50" rx="5" fill="#fff" stroke="#333" stroke-width="2"/>
+                    <text x="100" y="75" text-anchor="middle" font-size="12" font-weight="bold">CAMERA HD #2</text>
+
+                    <!-- RFID Ra -->
+                    <rect x="20" y="110" width="160" height="50" rx="5" fill="#fff" stroke="#2196F3" stroke-width="2"/>
+                    <text x="100" y="140" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565C0">RFID RC522 #2</text>
+
+                    <!-- Chú thích dùng chung ESP32 #1 -->
+                    <text x="100" y="180" text-anchor="middle" font-size="9" fill="#666">(Dung chung ESP32-S3 #1)</text>
+                </g>
+
+                <!-- ========== KHỐI 3: TRẠM THANH TOÁN (giữa dưới) ========== -->
+                <g transform="translate(250, 450)">
+                    <rect x="0" y="0" width="200" height="180" rx="10" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="2"/>
+                    <text x="100" y="25" text-anchor="middle" font-size="14" font-weight="bold" fill="#7B1FA2">TRAM THANH TOAN</text>
+
+                    <!-- RFID Thanh toán -->
+                    <rect x="20" y="45" width="160" height="45" rx="5" fill="#fff" stroke="#2196F3" stroke-width="2"/>
+                    <text x="100" y="72" text-anchor="middle" font-size="11" font-weight="bold" fill="#1565C0">RFID RC522 #3</text>
+
+                    <!-- TFT Display -->
+                    <rect x="20" y="100" width="160" height="45" rx="5" fill="#000080" stroke="#000" stroke-width="2"/>
+                    <text x="100" y="127" text-anchor="middle" font-size="11" font-weight="bold" fill="#00FF00">TFT ST7735</text>
+
+                    <!-- ESP32 #2 -->
+                    <rect x="50" y="155" width="100" height="20" rx="3" fill="#1B5E20"/>
+                    <text x="100" y="168" text-anchor="middle" font-size="9" font-weight="bold" fill="#fff">ESP32-S3 #2</text>
+                </g>
+
+                <!-- ========== KHỐI 4: DESKTOP/LAPTOP (giữa trên) ========== -->
+                <g transform="translate(280, 80)">
+                    <rect x="0" y="0" width="220" height="320" rx="10" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+                    <text x="110" y="25" text-anchor="middle" font-size="14" font-weight="bold" fill="#2E7D32">DESKTOP / LAPTOP</text>
+
+                    <!-- Desktop App -->
+                    <rect x="15" y="45" width="190" height="70" rx="5" fill="#2d5a8c" stroke="#1a3a5c" stroke-width="2"/>
+                    <text x="110" y="70" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">DESKTOP APP</text>
+                    <text x="110" y="88" text-anchor="middle" font-size="10" fill="#B3E5FC">PySide6 (Python)</text>
+                    <text x="110" y="103" text-anchor="middle" font-size="9" fill="#B3E5FC">Giao dien giam sat</text>
+
+                    <!-- AI Module -->
+                    <rect x="15" y="125" width="190" height="90" rx="5" fill="#FF5722" stroke="#E64A19" stroke-width="2"/>
+                    <text x="110" y="150" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">AI MODULE</text>
+                    <rect x="25" y="160" width="85" height="25" rx="3" fill="#E64A19"/>
+                    <text x="67" y="177" text-anchor="middle" font-size="10" fill="#fff">YOLOv8</text>
+                    <rect x="115" y="160" width="80" height="25" rx="3" fill="#E64A19"/>
+                    <text x="155" y="177" text-anchor="middle" font-size="10" fill="#fff">EasyOCR</text>
+                    <text x="110" y="203" text-anchor="middle" font-size="9" fill="#FFCCBC">Nhan dien bien so xe</text>
+
+                    <!-- OpenCV -->
+                    <rect x="15" y="225" width="90" height="40" rx="5" fill="#2196F3" stroke="#1565C0" stroke-width="2"/>
+                    <text x="60" y="250" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">OpenCV</text>
+
+                    <!-- MQTT Client -->
+                    <rect x="115" y="225" width="90" height="40" rx="5" fill="#9C27B0" stroke="#7B1FA2" stroke-width="2"/>
+                    <text x="160" y="245" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff">MQTT</text>
+                    <text x="160" y="258" text-anchor="middle" font-size="9" fill="#E1BEE7">Client</text>
+
+                    <!-- DB Client -->
+                    <rect x="15" y="275" width="190" height="35" rx="5" fill="#336791" stroke="#1d4f6f" stroke-width="2"/>
+                    <text x="110" y="297" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">PostgreSQL Client (psycopg2)</text>
+                </g>
+
+                <!-- ========== KHỐI 5: LINUX SERVER (phải) ========== -->
+                <g transform="translate(560, 80)">
+                    <rect x="0" y="0" width="240" height="350" rx="10" fill="#ECEFF1" stroke="#37474F" stroke-width="2"/>
+                    <text x="120" y="25" text-anchor="middle" font-size="14" font-weight="bold" fill="#37474F">LINUX SERVER (Ubuntu)</text>
+                    <text x="120" y="42" text-anchor="middle" font-size="10" fill="#78909C">192.168.1.165</text>
+
+                    <!-- MQTT Broker -->
+                    <rect x="15" y="55" width="210" height="60" rx="5" fill="#9C27B0" stroke="#7B1FA2" stroke-width="2"/>
+                    <text x="120" y="80" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">MQTT BROKER</text>
+                    <text x="120" y="100" text-anchor="middle" font-size="10" fill="#E1BEE7">Mosquitto - Port 1883</text>
+
+                    <!-- PostgreSQL -->
+                    <rect x="15" y="125" width="210" height="70" rx="5" fill="#336791" stroke="#1d4f6f" stroke-width="2"/>
+                    <text x="120" y="150" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">PostgreSQL DATABASE</text>
+                    <text x="120" y="168" text-anchor="middle" font-size="9" fill="#B3E5FC">users | cards | parking_sessions</text>
+                    <text x="120" y="183" text-anchor="middle" font-size="9" fill="#B3E5FC">Port 5432</text>
+
+                    <!-- Web API -->
+                    <rect x="15" y="205" width="210" height="60" rx="5" fill="#4CAF50" stroke="#2E7D32" stroke-width="2"/>
+                    <text x="120" y="230" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">WEB API</text>
+                    <text x="120" y="250" text-anchor="middle" font-size="10" fill="#C8E6C9">Flask + Gunicorn</text>
+
+                    <!-- Web App -->
+                    <rect x="15" y="275" width="210" height="60" rx="5" fill="#fff" stroke="#0066cc" stroke-width="2"/>
+                    <text x="120" y="300" text-anchor="middle" font-size="13" font-weight="bold" fill="#0066cc">WEB APP</text>
+                    <text x="120" y="320" text-anchor="middle" font-size="10" fill="#666">Quan ly he thong (Admin)</text>
+                </g>
+
+                <!-- ========== KHỐI 6: INTERNET/CLOUD (phải trên) ========== -->
+                <g transform="translate(860, 120)">
+                    <rect x="0" y="0" width="180" height="120" rx="10" fill="#E1F5FE" stroke="#0288D1" stroke-width="2"/>
+                    <text x="90" y="25" text-anchor="middle" font-size="13" font-weight="bold" fill="#0288D1">INTERNET</text>
+
+                    <!-- VietQR -->
+                    <rect x="15" y="40" width="150" height="30" rx="5" fill="#fff" stroke="#1565C0" stroke-width="1"/>
+                    <text x="90" y="60" text-anchor="middle" font-size="11" font-weight="bold" fill="#1565C0">VietQR API</text>
+
+                    <!-- SePay -->
+                    <rect x="15" y="80" width="150" height="30" rx="5" fill="#fff" stroke="#2E7D32" stroke-width="1"/>
+                    <text x="90" y="100" text-anchor="middle" font-size="11" font-weight="bold" fill="#2E7D32">SePay Webhook</text>
+                </g>
+
+                <!-- ========== KHỐI 7: USER (phải dưới) ========== -->
+                <g transform="translate(880, 300)">
+                    <ellipse cx="70" cy="40" rx="60" ry="35" fill="#FFF9C4" stroke="#F9A825" stroke-width="2"/>
+                    <text x="70" y="35" text-anchor="middle" font-size="12" font-weight="bold" fill="#F57F17">CHU XE</text>
+                    <text x="70" y="50" text-anchor="middle" font-size="10" fill="#F57F17">(User)</text>
+                </g>
+
+                <g transform="translate(880, 400)">
+                    <ellipse cx="70" cy="40" rx="60" ry="35" fill="#FFECB3" stroke="#FF8F00" stroke-width="2"/>
+                    <text x="70" y="35" text-anchor="middle" font-size="12" font-weight="bold" fill="#E65100">QUAN LY</text>
+                    <text x="70" y="50" text-anchor="middle" font-size="10" fill="#E65100">(Admin)</text>
+                </g>
+
+                <!-- ========== CÁC ĐƯỜNG KẾT NỐI ========== -->
+
+                <!-- Camera 1 -> Desktop (USB) -->
+                <line x1="220" y1="150" x2="280" y2="150" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                <rect x="225" y="138" width="35" height="14" fill="#fff" stroke="#ccc" rx="2"/>
+                <text x="242" y="149" text-anchor="middle" font-size="8" fill="#333">USB</text>
+
+                <!-- Camera 2 -> Desktop (USB) -->
+                <line x1="220" y1="470" x2="250" y2="470" stroke="#333" stroke-width="2"/>
+                <line x1="250" y1="470" x2="250" y2="300" stroke="#333" stroke-width="2"/>
+                <line x1="250" y1="300" x2="280" y2="300" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                <rect x="225" y="380" width="35" height="14" fill="#fff" stroke="#ccc" rx="2"/>
+                <text x="242" y="391" text-anchor="middle" font-size="8" fill="#333">USB</text>
+
+                <!-- ESP32 #1 -> RFID 1 (SPI) -->
+                <line x1="100" y1="255" x2="100" y2="170" stroke="#2196F3" stroke-width="2" stroke-dasharray="5,3"/>
+                <text x="75" y="215" font-size="8" fill="#1565C0">SPI</text>
+
+                <!-- ESP32 #1 -> RFID 2 (SPI) -->
+                <line x1="140" y1="330" x2="140" y2="560" stroke="#2196F3" stroke-width="2" stroke-dasharray="5,3"/>
+                <text x="145" y="380" font-size="8" fill="#1565C0">SPI</text>
+
+                <!-- ESP32 #1 -> Server MQTT -->
+                <path d="M220 300 Q240 300 240 200 Q240 100 560 100" stroke="#9C27B0" stroke-width="2" fill="none" marker-end="url(#arrow-purple)"/>
+                <rect x="380" y="88" width="45" height="14" fill="#fff" stroke="#9C27B0" rx="2"/>
+                <text x="402" y="99" text-anchor="middle" font-size="8" fill="#7B1FA2">MQTT</text>
+
+                <!-- ESP32 #2 -> Server MQTT -->
+                <path d="M450 560 Q520 560 520 400 Q520 100 560 100" stroke="#9C27B0" stroke-width="2" fill="none" marker-end="url(#arrow-purple)"/>
+                <rect x="480" y="300" width="45" height="14" fill="#fff" stroke="#9C27B0" rx="2"/>
+                <text x="502" y="311" text-anchor="middle" font-size="8" fill="#7B1FA2">MQTT</text>
+
+                <!-- ESP32 #2 -> RFID 3 + TFT (SPI) -->
+                <text x="460" y="580" font-size="8" fill="#1565C0">SPI</text>
+
+                <!-- Desktop MQTT -> Server MQTT -->
+                <line x1="500" y1="245" x2="560" y2="115" stroke="#9C27B0" stroke-width="2" marker-end="url(#arrow-purple)"/>
+                <rect x="510" y="170" width="45" height="14" fill="#fff" stroke="#9C27B0" rx="2"/>
+                <text x="532" y="181" text-anchor="middle" font-size="8" fill="#7B1FA2">MQTT</text>
+
+                <!-- Desktop -> PostgreSQL -->
+                <line x1="500" y1="375" x2="560" y2="375" stroke="#336791" stroke-width="2"/>
+                <line x1="560" y1="375" x2="560" y2="180" stroke="#336791" stroke-width="2" marker-end="url(#arrow)"/>
+                <rect x="505" y="360" width="50" height="14" fill="#fff" stroke="#336791" rx="2"/>
+                <text x="530" y="371" text-anchor="middle" font-size="7" fill="#336791">TCP/IP</text>
+
+                <!-- Server -> Internet -->
+                <line x1="800" y1="180" x2="860" y2="180" stroke="#0288D1" stroke-width="2" marker-end="url(#arrow-blue)"/>
+                <rect x="810" y="168" width="40" height="14" fill="#fff" stroke="#0288D1" rx="2"/>
+                <text x="830" y="179" text-anchor="middle" font-size="8" fill="#0288D1">HTTP</text>
+
+                <!-- User -> RFID (quẹt thẻ) -->
+                <line x1="880" y1="340" x2="450" y2="520" stroke="#F9A825" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+                <text x="650" y="420" font-size="9" fill="#F57F17">Quet the RFID</text>
+
+                <!-- Admin -> Web App -->
+                <line x1="880" y1="440" x2="800" y2="340" stroke="#FF8F00" stroke-width="2" marker-end="url(#arrow)"/>
+                <rect x="820" y="380" width="50" height="14" fill="#fff" stroke="#FF8F00" rx="2"/>
+                <text x="845" y="391" text-anchor="middle" font-size="8" fill="#E65100">HTTP</text>
+
+                <!-- ========== CHÚ THÍCH ========== -->
+                <g transform="translate(20, 650)">
+                    <text x="0" y="0" font-size="12" font-weight="bold" fill="#333">CHU THICH:</text>
+
+                    <line x1="0" y1="20" x2="40" y2="20" stroke="#333" stroke-width="2"/>
+                    <text x="50" y="24" font-size="10" fill="#333">USB / Vat ly</text>
+
+                    <line x1="150" y1="20" x2="190" y2="20" stroke="#9C27B0" stroke-width="2"/>
+                    <text x="200" y="24" font-size="10" fill="#7B1FA2">MQTT Protocol</text>
+
+                    <line x1="320" y1="20" x2="360" y2="20" stroke="#2196F3" stroke-width="2" stroke-dasharray="5,3"/>
+                    <text x="370" y="24" font-size="10" fill="#1565C0">SPI Bus</text>
+
+                    <line x1="450" y1="20" x2="490" y2="20" stroke="#336791" stroke-width="2"/>
+                    <text x="500" y="24" font-size="10" fill="#336791">PostgreSQL</text>
+
+                    <line x1="600" y1="20" x2="640" y2="20" stroke="#0288D1" stroke-width="2"/>
+                    <text x="650" y="24" font-size="10" fill="#0288D1">HTTP/REST API</text>
+
+                    <line x1="780" y1="20" x2="820" y2="20" stroke="#F9A825" stroke-width="2" stroke-dasharray="5,3"/>
+                    <text x="830" y="24" font-size="10" fill="#F57F17">Tuong tac User</text>
+                </g>
+
+                <!-- ========== LUỒNG DỮ LIỆU ========== -->
+                <g transform="translate(20, 700)">
+                    <text x="0" y="0" font-size="11" font-weight="bold" fill="#0066cc">LUONG DU LIEU:</text>
+                    <text x="0" y="18" font-size="9" fill="#333">1. Camera chup anh -> Desktop xu ly AI (YOLOv8 + EasyOCR) -> Nhan dien bien so</text>
+                    <text x="0" y="32" font-size="9" fill="#333">2. ESP32 doc RFID -> Gui MQTT -> Server luu Database -> Phan hoi Desktop</text>
+                    <text x="0" y="46" font-size="9" fill="#333">3. Thanh toan: ESP32 #2 -> HTTP API -> VietQR -> SePay Webhook -> Cap nhat Database</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+</body>
+</html>

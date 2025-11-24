@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sơ đồ Hệ thống - Nền trắng cho PowerPoint</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            color: #1a1a2e;
+            padding: 40px;
+        }
+
+        .diagram-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            background: #ffffff;
+        }
+
+        .diagram-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 800;
+            color: #1a1a2e;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ========== SƠ ĐỒ KIẾN TRÚC HỆ THỐNG ========== */
+        .architecture-diagram {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .arch-layer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .layer-label {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .layer-content {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-left: 120px;
+        }
+
+        .arch-node {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px 25px;
+            text-align: center;
+            min-width: 160px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .arch-node:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .arch-node.primary {
+            border-color: #4361ee;
+            background: linear-gradient(135deg, #4361ee10, #3a0ca310);
+        }
+
+        .arch-node.server {
+            border-color: #e63946;
+            border-width: 3px;
+        }
+
+        .arch-node.desktop {
+            border-color: #4361ee;
+            border-width: 3px;
+        }
+
+        .arch-node.esp32 {
+            border-color: #7209b7;
+            border-width: 3px;
+        }
+
+        .arch-node.cloud {
+            border-color: #f72585;
+            border-width: 3px;
+        }
+
+        .node-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .node-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+
+        .node-subtitle {
+            font-size: 11px;
+            color: #6c757d;
+        }
+
+        /* Connection lines */
+        .connector {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .connector-line {
+            width: 3px;
+            height: 30px;
+            background: linear-gradient(180deg, #4361ee, #7209b7);
+            border-radius: 2px;
+        }
+
+        .connector-arrows {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+        }
+
+        /* ========== SƠ ĐỒ CHI TIẾT THÀNH PHẦN ========== */
+        .detail-section {
+            margin-top: 60px;
+            page-break-before: always;
+        }
+
+        .detail-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 800;
+            color: #1a1a2e;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        .unified-diagram {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+            border: 3px solid #1a1a2e;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .diagram-row {
+            display: grid;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .diagram-row:last-child {
+            border-bottom: none;
+        }
+
+        .diagram-row.header {
+            background: linear-gradient(135deg, #1a1a2e, #2d3436);
+            color: white;
+        }
+
+        .diagram-row.cloud-row {
+            grid-template-columns: 120px 1fr;
+            background: #fff5f5;
+        }
+
+        .diagram-row.server-row {
+            grid-template-columns: 120px 1fr;
+            background: #f0f7ff;
+        }
+
+        .diagram-row.app-row {
+            grid-template-columns: 120px 1fr;
+            background: #f0fff4;
+        }
+
+        .diagram-row.iot-row {
+            grid-template-columns: 120px 1fr;
+            background: #fdf4ff;
+        }
+
+        .row-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 15px;
+            font-weight: 800;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-right: 2px solid #dee2e6;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+        }
+
+        .cloud-row .row-label {
+            background: #e63946;
+            color: white;
+        }
+
+        .server-row .row-label {
+            background: #4361ee;
+            color: white;
+        }
+
+        .app-row .row-label {
+            background: #2a9d8f;
+            color: white;
+        }
+
+        .iot-row .row-label {
+            background: #7209b7;
+            color: white;
+        }
+
+        .row-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 25px;
+            align-items: stretch;
+        }
+
+        .component-card {
+            flex: 1;
+            min-width: 200px;
+            max-width: 280px;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border: 1px solid #e9ecef;
+        }
+
+        .component-card .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #f1f3f4;
+        }
+
+        .component-card .card-icon {
+            font-size: 28px;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .component-card .card-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #1a1a2e;
+        }
+
+        .component-card .card-subtitle {
+            font-size: 11px;
+            color: #6c757d;
+            margin-top: 2px;
+        }
+
+        .component-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .component-card li {
+            font-size: 12px;
+            color: #495057;
+            padding: 6px 0;
+            border-bottom: 1px solid #f8f9fa;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .component-card li:last-child {
+            border-bottom: none;
+        }
+
+        .component-card li::before {
+            content: '●';
+            font-size: 6px;
+            color: #4361ee;
+        }
+
+        /* ========== SƠ ĐỒ LUỒNG DỮ LIỆU ========== */
+        .flow-section {
+            margin-top: 60px;
+            page-break-before: always;
+        }
+
+        .flow-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            position: relative;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: stretch;
+            position: relative;
+        }
+
+        .flow-number {
+            width: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .flow-number .number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #4361ee, #7209b7);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+            z-index: 2;
+        }
+
+        .flow-number .line {
+            flex: 1;
+            width: 3px;
+            background: linear-gradient(180deg, #4361ee, #7209b7);
+            margin-top: -5px;
+        }
+
+        .flow-step:last-child .flow-number .line {
+            display: none;
+        }
+
+        .flow-content {
+            flex: 1;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .flow-content h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
+
+        .flow-content p {
+            font-size: 13px;
+            color: #6c757d;
+            line-height: 1.5;
+        }
+
+        .flow-content code {
+            background: #e9ecef;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            color: #e63946;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* ========== BẢNG MQTT ========== */
+        .mqtt-section {
+            margin-top: 60px;
+            page-break-before: always;
+        }
+
+        .mqtt-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 2px solid #1a1a2e;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .mqtt-table th {
+            background: linear-gradient(135deg, #1a1a2e, #2d3436);
+            color: white;
+            padding: 15px 20px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .mqtt-table td {
+            padding: 12px 20px;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 13px;
+        }
+
+        .mqtt-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .mqtt-table code {
+            background: #fff3cd;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            color: #856404;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* ========== CÔNG NGHỆ ========== */
+        .tech-section {
+            margin-top: 60px;
+            page-break-before: always;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+        }
+
+        .tech-item {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px 15px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-color: #4361ee;
+        }
+
+        .tech-item .tech-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .tech-item .tech-name {
+            font-weight: 700;
+            font-size: 13px;
+            color: #1a1a2e;
+        }
+
+        .tech-item .tech-desc {
+            font-size: 10px;
+            color: #6c757d;
+            margin-top: 4px;
+        }
+
+        /* ========== PHÍ GỬI XE ========== */
+        .fee-section {
+            margin-top: 60px;
+            page-break-before: always;
+        }
+
+        .fee-box {
+            background: #f8f9fa;
+            border: 3px solid #1a1a2e;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .fee-formula {
+            font-size: 20px;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #4361ee, #7209b7);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 12px;
+            display: inline-block;
+            margin: 25px 0;
+        }
+
+        .fee-params {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .fee-param {
+            text-align: center;
+        }
+
+        .fee-param .label {
+            font-size: 12px;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+
+        .fee-param .value {
+            font-size: 24px;
+            font-weight: 800;
+            color: #e63946;
+        }
+
+        .fee-examples {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .fee-example {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .fee-example .time {
+            font-size: 14px;
+            color: #4361ee;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .fee-example .amount {
+            font-size: 22px;
+            font-weight: 800;
+            color: #e63946;
+        }
+
+        /* ========== PRINT STYLES ========== */
+        @media print {
+            body {
+                padding: 20px;
+            }
+
+            .diagram-container {
+                padding: 20px;
+            }
+
+            .detail-section,
+            .flow-section,
+            .mqtt-section,
+            .tech-section,
+            .fee-section {
+                page-break-before: always;
+            }
+        }
+
+        /* ========== HƯỚNG DẪN EXPORT ========== */
+        .export-guide {
+            background: linear-gradient(135deg, #fff3cd, #ffeeba);
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-bottom: 40px;
+        }
+
+        .export-guide h3 {
+            color: #856404;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .export-guide ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .export-guide li {
+            font-size: 13px;
+            color: #856404;
+            padding: 5px 0;
+        }
+
+        .export-guide li::before {
+            content: '✓ ';
+            font-weight: bold;
+        }
+
+        @media print {
+            .export-guide {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="diagram-container">
+
+        <!-- Hướng dẫn export -->
+        <div class="export-guide">
+            <h3>📸 Hướng dẫn chụp ảnh cho PowerPoint:</h3>
+            <ul>
+                <li><strong>Cách 1:</strong> Nhấn <kbd>Ctrl + P</kbd> → Chọn "Microsoft Print to PDF" → Save as PDF → Mở PDF và chụp</li>
+                <li><strong>Cách 2:</strong> Dùng Snipping Tool (Win + Shift + S) để chụp từng phần</li>
+                <li><strong>Cách 3:</strong> Nhấn F12 → DevTools → Chọn phần tử → Chuột phải → "Capture node screenshot"</li>
+                <li><strong>Cách 4:</strong> Zoom 100% (Ctrl+0), chụp Full Page bằng extension "GoFullPage"</li>
+            </ul>
+        </div>
+
+        <!-- ==================== SƠ ĐỒ 1: KIẾN TRÚC TỔNG QUAN ==================== -->
+        <div class="diagram-title">SƠ ĐỒ KIẾN TRÚC HỆ THỐNG BÃI ĐỖ XE THÔNG MINH</div>
+
+        <div class="unified-diagram">
+            <!-- CLOUD LAYER -->
+            <div class="diagram-row cloud-row">
+                <div class="row-label">CLOUD</div>
+                <div class="row-content">
+                    <div class="component-card">
+                        <div class="card-header">
+                            <div class="card-icon">☁️</div>
+                            <div>
+                                <div class="card-title">Cloudflare Tunnel</div>
+                                <div class="card-subtitle">Remote Access</div>
+                            </div>
+                        </div>
+                        <ul>
+                            <li>Truy cập từ xa an toàn</li>
+                            <li>HTTPS tự động</li>
+                            <li>DDoS Protection</li>
+                        </ul>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="card-header">
+                            <div class="card-icon">💳</div>
+                            <div>
+                                <div class="card-title">SePay API</div>
+                                <div class="card-subtitle">Payment Gateway</div>
+                            </div>
+                        </div>
+                        <ul>
+                            <li>Xác thực thanh toán</li>
+                            <li>Webhook callback</li>
+                            <li>Transaction tracking</li>
+                        </ul>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="card-header">
+                            <div class="card-icon">📱</div>
+                            <div>
+                                <div class="card-title">VietQR API</div>
+                                <div class="card-subtitle">img.vietqr.io</div>
+                            </div>
+                        </div>
+                        <ul>
+                            <li>Tạo mã QR chuẩn VietQR</li>
+                            <li>Hỗ trợ 40+ ngân hàng</li>
+                            <li>VietinBank integration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SERVER LAYER -->
+            <div class="diagram-row server-row">
+                <div class="row-label">SERVER</div>
+                <div class="row-content">
+                    <div class="component-card">
+                        <div class="card-header">
+                            <div class="card-icon">🗄️</div>
+                            <div>
+                                <div class="card-title">PostgreSQL</div>
+                                <div class="card-subtitle">Port 5432</div>
+                            </div>
+                        </div>
+                        <ul>
+                            <li>Database: parking_system</li>
+                            <li>Tables: users, cards, sessions</li>
+                            <li>Timezone: Asia/Ho_Chi_Minh</li>
+                        </ul>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="card-header">
+                            <div class="card-icon">🌐</div>
+                            <div>
+                                <div class="card-title">Flask Web App</div>
+                                <div class="card-subtitle">Port 5000</div>
+                            </div>
+                        </div>
+                        <ul>
+                            <li>Dashboard quản lý</li>
+                            <li>REST API endpoints</li>
+                            <li>Jinja2 templates</li>
+                        </ul>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="card-header">
+                            <div class="card-icon">📡</div>
+                            <div>
+                                <div class="card-title">Mosquitto MQTT</div>
+                                <div class="card-subtitle">Port 1883</div>
+                            </div>
+                        </div>
+                        <ul>
+                            <li>Message Broker</li>
+                            <li>Pub/Sub pattern</li>
+                            <li>Real-time communication</li>
+                        </ul>
+                    </div>
+
+                    <div class="component-card" style="background: #e8f4f8; border-color: #4361ee;">
+                        <div class="card-header">
+                            <div class="card-icon">🐧</div>
+                            <div>
+                                <div class="card-title">Linux Ubuntu Server</div>
+                                <div class="card-subtitle">192.168.1.165</div>
+                            </div>
+                        </div>
+                        <ul>
+                            <li>Host: linuxtuananh.zapto.org</li>
+                            <li>User: tuananh</li>
+                            <li>24/7 uptime</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- APPLICATION LAYER -->
+            <div class="diagram-row app-row">
+                <div class="row-label">APP</div>
+                <div class="row-content">
+                    <div class="component-card" style="min-width: 350px; max-width: 400px;">
+                        <div class="card-header">
+                            <div class="card-icon">🖥️</div>
+                            <div>
+                                <div class="card-title">Desktop Application</div>
+                                <div class="card-subtitle">Windows PC - PySide6</div>
+                            </div>
+                        </div>
+                        <ul>
+                            <li><strong>YOLOv8</strong> - Phát hiện biển số xe</li>
+                            <li><strong>EasyOCR</strong> - Đọc ký tự biển số</li>
+                            <li><strong>OpenCV</strong> - Xử lý ảnh, video</li>
+                            <li><strong>MQTT Client</strong> - Giao tiếp ESP32</li>
+                            <li><strong>QR Display</strong> - Hiển thị mã thanh toán</li>
+                            <li><strong>Camera IN/OUT</strong> - 2 webcam USB</li>
+                        </ul>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="card-header">
+                            <div class="card-icon">🤖</div>
+                            <div>
+                                <div class="card-title">AI/ML Module</div>
+                                <div class="card-subtitle">ALPR Engine</div>
+                            </div>
+                        </div>
+                        <ul>
+                            <li>YOLOv8n detection</li>
+                            <li>Custom trained model</li>
+                            <li>Multi-frame voting</li>
+                            <li>Perspective warp</li>
+                            <li>CUDA/CPU support</li>
+                        </ul>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="card-header">
+                            <div class="card-icon">💰</div>
+                            <div>
+                                <div class="card-title">Payment Module</div>
+                                <div class="card-subtitle">VietQR + SePay</div>
+                            </div>
+                        </div>
+                        <ul>
+                            <li>QR code generation</li>
+                            <li>Bank: VietinBank</li>
+                            <li>Auto fee calculation</li>
+                            <li>Webhook verification</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IoT LAYER -->
+            <div class="diagram-row iot-row">
+                <div class="row-label">IoT</div>
+                <div class="row-content">
+                    <div class="component-card">
+                        <div class="card-header">
+                            <div class="card-icon">🚧</div>
+                            <div>
+                                <div class="card-title">ESP32 Gate</div>
+                                <div class="card-subtitle">baidoxe - gate01</div>
+                            </div>
+                        </div>
+                        <ul>
+                            <li>Board: ESP32-S3</li>
+                            <li>2x RFID RC522 (IN/OUT)</li>
+                            <li>WiFi + MQTT client</li>
+                            <li>OTA update support</li>
+                            <li>IP: 192.168.1.60</li>
+                        </ul>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="card-header">
+                            <div class="card-icon">💳</div>
+                            <div>
+                                <div class="card-title">ESP32 Payment</div>
+                                <div class="card-subtitle">thanhtoan - gate02</div>
+                            </div>
+                        </div>
+                        <ul>
+                            <li>Board: ESP32-S3</li>
+                            <li>1x RFID RC522</li>
+                            <li>TFT ST7735 128x160</li>
+                            <li>State machine UI</li>
+                            <li>OTA update support</li>
+                        </ul>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="card-header">
+                            <div class="card-icon">📷</div>
+                            <div>
+                                <div class="card-title">Camera System</div>
+                                <div class="card-subtitle">USB Webcam</div>
+                            </div>
+                        </div>
+                        <ul>
+                            <li>Camera IN (Index 1)</li>
+                            <li>Camera OUT (Index 2)</li>
+                            <li>Resolution: 640x480</li>
+                            <li>DirectShow backend</li>
+                        </ul>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="card-header">
+                            <div class="card-icon">🔌</div>
+                            <div>
+                                <div class="card-title">Hardware Modules</div>
+                                <div class="card-subtitle">Peripherals</div>
+                            </div>
+                        </div>
+                        <ul>
+                            <li>MFRC522 RFID Reader</li>
+                            <li>ST7735 TFT Display</li>
+                            <li>SPI Communication</li>
+                            <li>3.3V Logic Level</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SƠ ĐỒ 2: LUỒNG XE VÀO ==================== -->
+        <div class="flow-section">
+            <div class="detail-title">LUỒNG XỬ LÝ: XE VÀO BÃI</div>
+
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <div class="flow-number">
+                        <div class="number">1</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="flow-content">
+                        <h4>🚗 Xe đến cổng vào</h4>
+                        <p>Xe dừng trước barrier, người dùng quét thẻ RFID tại đầu đọc RC522-A</p>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="flow-number">
+                        <div class="number">2</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="flow-content">
+                        <h4>📡 ESP32 gửi trigger MQTT</h4>
+                        <p>Publish message đến topic <code>parking/gate/gate01/in</code> với payload: card_id, mac, timestamp</p>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="flow-number">
+                        <div class="number">3</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="flow-content">
+                        <h4>📷 Desktop App capture ảnh</h4>
+                        <p>Camera IN chụp frame, lưu vào buffer với multi-frame selection (chọn frame có độ nét cao nhất)</p>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="flow-number">
+                        <div class="number">4</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="flow-content">
+                        <h4>🎯 YOLOv8 detect biển số</h4>
+                        <p>Model <code>license_plate_detector.pt</code> xác định vùng chứa biển số với confidence > 0.35</p>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="flow-number">
+                        <div class="number">5</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="flow-content">
+                        <h4>👁️ EasyOCR đọc ký tự</h4>
+                        <p>Crop biển số → Perspective warp → CLAHE enhance → OCR → Multi-frame voting → Clean text</p>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="flow-number">
+                        <div class="number">6</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="flow-content">
+                        <h4>💾 Lưu vào PostgreSQL</h4>
+                        <p>INSERT INTO parking_sessions (card_id, plate_number, time_in, staff_id) với timezone Asia/Ho_Chi_Minh</p>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="flow-number">
+                        <div class="number">7</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="flow-content">
+                        <h4>✅ Mở barrier & Hiển thị</h4>
+                        <p>Gửi tín hiệu mở cổng, hiển thị thông tin xe trên UI, lưu ảnh biển số vào thư mục plates/IN</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SƠ ĐỒ 3: LUỒNG XE RA ==================== -->
+        <div class="flow-section">
+            <div class="detail-title">LUỒNG XỬ LÝ: XE RA + THANH TOÁN</div>
+
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <div class="flow-number">
+                        <div class="number">1</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="flow-content">
+                        <h4>🚗 Xe đến cổng ra</h4>
+                        <p>Quét thẻ RFID tại đầu đọc RC522-B, ESP32 publish đến <code>parking/gate/gate01/out</code></p>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="flow-number">
+                        <div class="number">2</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="flow-content">
+                        <h4>🔍 Query thông tin xe</h4>
+                        <p>Tìm parking_session theo card_id, lấy time_in, plate_number. Tính time_out = NOW()</p>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="flow-number">
+                        <div class="number">3</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="flow-content">
+                        <h4>💰 Tính phí gửi xe</h4>
+                        <p>Công thức: <code>FEE = 3000 + floor(duration/60) × 5000</code> (VNĐ)</p>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="flow-number">
+                        <div class="number">4</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="flow-content">
+                        <h4>📱 Tạo mã QR VietQR</h4>
+                        <p>Gọi API <code>img.vietqr.io</code> với bankCode, accountNo, amount, description → Nhận PNG QR</p>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="flow-number">
+                        <div class="number">5</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="flow-content">
+                        <h4>🖥️ Hiển thị QR Dialog</h4>
+                        <p>QRPaymentWidget popup với thông tin: biển số, giờ vào/ra, số tiền, mã QR 330x330px</p>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="flow-number">
+                        <div class="number">6</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="flow-content">
+                        <h4>📲 Khách quét QR thanh toán</h4>
+                        <p>Mở app Banking → Quét mã VietQR → Xác nhận chuyển tiền → Ngân hàng xử lý giao dịch</p>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="flow-number">
+                        <div class="number">7</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="flow-content">
+                        <h4>🔔 SePay Webhook callback</h4>
+                        <p>SePay gửi HTTP POST khi nhận tiền → Server verify → Publish <code>payment_confirmed</code></p>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="flow-number">
+                        <div class="number">8</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="flow-content">
+                        <h4>✅ Cập nhật & Mở cổng</h4>
+                        <p>UPDATE payment_status='paid', hiển thị "THANH TOÁN THÀNH CÔNG", mở barrier cho xe ra</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== BẢNG MQTT TOPICS ==================== -->
+        <div class="mqtt-section">
+            <div class="detail-title">MQTT TOPICS</div>
+
+            <table class="mqtt-table">
+                <thead>
+                    <tr>
+                        <th style="width: 35%;">Topic</th>
+                        <th style="width: 15%;">Publisher</th>
+                        <th style="width: 15%;">Subscriber</th>
+                        <th style="width: 35%;">Mô tả</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>parking/gate/gate01/in</code></td>
+                        <td>ESP32 baidoxe</td>
+                        <td>Desktop App</td>
+                        <td>Trigger khi có xe quét thẻ vào cổng</td>
+                    </tr>
+                    <tr>
+                        <td><code>parking/gate/gate01/out</code></td>
+                        <td>ESP32 baidoxe</td>
+                        <td>Desktop, Web</td>
+                        <td>Trigger khi có xe quét thẻ ra cổng</td>
+                    </tr>
+                    <tr>
+                        <td><code>parking/gate/gate01/heartbeat</code></td>
+                        <td>ESP32 baidoxe</td>
+                        <td>Desktop App</td>
+                        <td>Heartbeat mỗi 4 giây để kiểm tra online</td>
+                    </tr>
+                    <tr>
+                        <td><code>parking/gate/gate01/status</code></td>
+                        <td>ESP32 baidoxe</td>
+                        <td>Desktop App</td>
+                        <td>Trạng thái online/offline, IP, MAC</td>
+                    </tr>
+                    <tr>
+                        <td><code>parking/payment/gate02/card_scanned</code></td>
+                        <td>ESP32 thanhtoan</td>
+                        <td>Web App</td>
+                        <td>Quét thẻ tại trạm thanh toán riêng</td>
+                    </tr>
+                    <tr>
+                        <td><code>parking/payment/gate02/vehicle_info</code></td>
+                        <td>Web App</td>
+                        <td>ESP32 thanhtoan</td>
+                        <td>Thông tin xe: biển số, giờ, phí</td>
+                    </tr>
+                    <tr>
+                        <td><code>parking/payment/gate02/qr_data</code></td>
+                        <td>Web App</td>
+                        <td>Desktop App</td>
+                        <td>Dữ liệu QR: URL, content, base64</td>
+                    </tr>
+                    <tr>
+                        <td><code>parking/payment/gate02/payment_confirmed</code></td>
+                        <td>SePay Webhook</td>
+                        <td>ESP32, Desktop</td>
+                        <td>Xác nhận thanh toán thành công</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ==================== CÔNG THỨC TÍNH PHÍ ==================== -->
+        <div class="fee-section">
+            <div class="detail-title">CÔNG THỨC TÍNH PHÍ GỬI XE</div>
+
+            <div class="fee-box">
+                <div class="fee-formula">
+                    PHÍ = 3,000 + ⌊ thời_gian ÷ 60 ⌋ × 5,000 (VNĐ)
+                </div>
+
+                <div class="fee-params">
+                    <div class="fee-param">
+                        <div class="label">Phí cơ bản</div>
+                        <div class="value">3,000đ</div>
+                    </div>
+                    <div class="fee-param">
+                        <div class="label">Phí tăng thêm</div>
+                        <div class="value">5,000đ</div>
+                    </div>
+                    <div class="fee-param">
+                        <div class="label">Khoảng thời gian</div>
+                        <div class="value">60 phút</div>
+                    </div>
+                </div>
+
+                <div class="fee-examples">
+                    <div class="fee-example">
+                        <div class="time">⏱️ 30 phút</div>
+                        <div class="amount">3,000đ</div>
+                    </div>
+                    <div class="fee-example">
+                        <div class="time">⏱️ 1 giờ</div>
+                        <div class="amount">8,000đ</div>
+                    </div>
+                    <div class="fee-example">
+                        <div class="time">⏱️ 2.5 giờ</div>
+                        <div class="amount">13,000đ</div>
+                    </div>
+                    <div class="fee-example">
+                        <div class="time">⏱️ 5 giờ</div>
+                        <div class="amount">28,000đ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== CÔNG NGHỆ SỬ DỤNG ==================== -->
+        <div class="tech-section">
+            <div class="detail-title">CÔNG NGHỆ SỬ DỤNG</div>
+
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">🐍</div>
+                    <div class="tech-name">Python 3.10</div>
+                    <div class="tech-desc">Backend & AI</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🎯</div>
+                    <div class="tech-name">YOLOv8</div>
+                    <div class="tech-desc">Object Detection</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">👁️</div>
+                    <div class="tech-name">EasyOCR</div>
+                    <div class="tech-desc">Text Recognition</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📸</div>
+                    <div class="tech-name">OpenCV</div>
+                    <div class="tech-desc">Image Processing</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🖼️</div>
+                    <div class="tech-name">PySide6</div>
+                    <div class="tech-desc">Desktop GUI</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🌶️</div>
+                    <div class="tech-name">Flask</div>
+                    <div class="tech-desc">Web Framework</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🐘</div>
+                    <div class="tech-name">PostgreSQL</div>
+                    <div class="tech-desc">Database</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📡</div>
+                    <div class="tech-name">MQTT</div>
+                    <div class="tech-desc">IoT Protocol</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">⚡</div>
+                    <div class="tech-name">ESP32-S3</div>
+                    <div class="tech-desc">Microcontroller</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">💳</div>
+                    <div class="tech-name">RFID RC522</div>
+                    <div class="tech-desc">Card Reader</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📺</div>
+                    <div class="tech-name">ST7735 TFT</div>
+                    <div class="tech-desc">LCD Display</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📱</div>
+                    <div class="tech-name">VietQR</div>
+                    <div class="tech-desc">Payment QR</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; padding: 60px 0 20px; color: #6c757d; border-top: 2px solid #e9ecef; margin-top: 60px;">
+            <p style="font-size: 18px; font-weight: 700; color: #1a1a2e;">HỆ THỐNG QUẢN LÝ BÃI ĐỖ XE THÔNG MINH</p>
+            <p style="font-size: 14px; margin-top: 10px;">Smart Parking Management System</p>
+            <p style="font-size: 12px; margin-top: 5px;">Đồ án tốt nghiệp - 2024</p>
+        </div>
+
+    </div>
+</body>
+</html>
